@@ -11,7 +11,7 @@ fi
 
 # Install docker
 if home-stack::exists docker; then
-  echo "docker is already installed."
+  echo "docker is already installed"
 else
   exit
   echo "Installing Docker..."
@@ -22,7 +22,7 @@ fi
 
 # Install docker-compose
 if home-stack::exists docker-compose; then
-  echo "docker-compose is already installed."
+  echo "docker-compose is already installed"
 else
   echo "Installing docker-compose..."
   sudo apt install -y docker-compose
