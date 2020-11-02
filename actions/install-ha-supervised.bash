@@ -5,22 +5,22 @@ echo "Installing dependencies..."
 sudo apt update
 sudo apt install -y bash jq curl avahi-daemon dbus aaparmor network-manager
 
-machine=$(whiptail --title "Machine type" --radiolist \
+machine=$(whiptail --title "Machine type" --menu \
     "Please select you machine type:" 20 78 12 -- \
-    "raspberrypi4" " " "ON" \
-    "raspberrypi3" " " "OFF" \
-    "raspberrypi2" " " "OFF" \
-    "raspberrypi4-64" " " "OFF" \
-    "raspberrypi3-64" " " "OFF" \
-    "qemux86" " " "OFF" \
-    "qemux86-64" " " "OFF" \
-    "qemuarm" " " "OFF" \
-    "qemuarm-64" " " "OFF" \
-    "orangepi-prime" " " "OFF" \
-    "odroid-xu" " " "OFF" \
-    "odroid-c2" " " "OFF" \
-    "intel-nuc" " " "OFF" \
-    "tinker" " " "OFF" \
+    "raspberrypi4" " " \
+    "raspberrypi3" " " \
+    "raspberrypi2" " " \
+    "raspberrypi4-64" " " \
+    "raspberrypi3-64" " " \
+    "qemux86" " " \
+    "qemux86-64" " " \
+    "qemuarm" " " \
+    "qemuarm-64" " " \
+    "orangepi-prime" " " \
+    "odroid-xu" " " \
+    "odroid-c2" " " \
+    "intel-nuc" " " \
+    "tinker" " " \
     3>&1 1>&2 2>&3)
 
 if [ -n "$machine" ]; then
