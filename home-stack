@@ -7,6 +7,21 @@ home-stack::exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
+# Search all directories up until it finds specified file
+# USAGE:
+#   home-stack::lookup <command>
+home-stack::lookup() {
+  x=$(pwd)
+  while [ "$x" != "/" ] ; do
+    match=$(find "$x" -maxdepth 1 -name "$1")
+    if [[ -n "$match" ]]; then
+      echo "$match"
+      return
+    fi
+    x=$(dirname "$x")
+  done
+}
+
 # ------------------------------------------------------------------------------
 # A tool for bootstraping and managing smart homes
 #
@@ -28,6 +43,7 @@ main_action=$(whiptail --title "Home Stack" --menu --notags \
   "" 20 78 12 -- \
   "install-docker" "Install Docker" \
   "install-ha-supervised" "Install Home Assistant Supervised" \
+  "build-containers" "Build Containers" \
   3>&1 1>&2 2>&3)
 
 case $main_action in
@@ -38,5 +54,9 @@ case $main_action in
   'install-ha-supervised')
     # shellcheck source=./actions/install-ha-supervised.bash
     source "$HOME_STACK_ROOT/actions/install-ha-supervised.bash"
+  ;;
+  'build-containers')
+    # shellcheck source=./actions/build-containers.bash
+    source "$HOME_STACK_ROOT/actions/build-containers.bash"
   ;;
 esac
