@@ -13,7 +13,6 @@ fi
 if home-stack::exists docker; then
   echo "docker is already installed"
 else
-  exit
   echo "Installing Docker..."
   curl -fsSL https://get.docker.com | sh
   sudo usermod -G docker -a $USER

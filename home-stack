@@ -4,14 +4,14 @@
 # USAGE:
 #   home-stack::exists <command>
 home-stack::exists() {
-  command -v $1 > /dev/null 2>&1
+  command -v "$1" > /dev/null 2>&1
 }
 
 # ------------------------------------------------------------------------------
 # A tool for bootstraping and managing smart homes
 #
-# Install Docker
-# Install Home Assistant Supervised
+# Install Docker - done
+# Install Home Assistant Supervised - done
 # Compose containers
 #     - Plex
 #     - Portainer
@@ -20,7 +20,7 @@ home-stack::exists() {
 #
 # ------------------------------------------------------------------------------
 
-HOME_STACK_ROOT="$(dirname $BASH_SOURCE)"
+HOME_STACK_ROOT="$(dirname "${BASH_SOURCE[0]}")"
 
 # Menu system starts here
 # Display main menu
@@ -32,9 +32,11 @@ main_action=$(whiptail --title "Home Stack" --menu --notags \
 
 case $main_action in
   'install-docker')
+    # shellcheck source=./actions/install-docker.bash
     source "$HOME_STACK_ROOT/actions/install-docker.bash"
   ;;
   'install-ha-supervised')
+    # shellcheck source=./actions/install-ha-supervised.bash
     source "$HOME_STACK_ROOT/actions/install-ha-supervised.bash"
   ;;
 esac
