@@ -19,6 +19,7 @@ if [[ -z $DOCKER_COMPOSE ]]; then
     10 60 $PWD 3>&1 1>&2 2>&3)
 
   if [[ $? = 0 ]]; then
+    # Copy templates to a future project root
     rsync -a -q "$HOME_STACK_ROOT/templates/" "$PROJECT_ROOT/"
 
     DOCKER_COMPOSE="$PROJECT_ROOT/docker-compose.yaml"

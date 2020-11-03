@@ -22,19 +22,6 @@ home-stack::lookup() {
   done
 }
 
-# ------------------------------------------------------------------------------
-# A tool for bootstraping and managing smart homes
-#
-# Install Docker - done
-# Install Home Assistant Supervised - done
-# Compose containers
-#     - Plex
-#     - Portainer
-#     - etc
-# Controll server
-#
-# ------------------------------------------------------------------------------
-
 HOME_STACK_ROOT="$(dirname "${BASH_SOURCE[0]}")"
 
 # Menu system starts here
@@ -44,6 +31,7 @@ main_action=$(whiptail --title "Home Stack" --menu --notags \
   "install-docker" "Install Docker" \
   "install-ha-supervised" "Install Home Assistant Supervised" \
   "build-containers" "Build Containers" \
+  "commands" "Control Containers" \
   3>&1 1>&2 2>&3)
 
 case $main_action in
@@ -58,5 +46,9 @@ case $main_action in
   'build-containers')
     # shellcheck source=./actions/build-containers.bash
     source "$HOME_STACK_ROOT/actions/build-containers.bash"
+  ;;
+  'commands')
+    # shellcheck source=./actions/commands.bash
+    source "$HOME_STACK_ROOT/actions/commands.bash"
   ;;
 esac
