@@ -22,7 +22,8 @@ home-stack::lookup() {
   done
 }
 
-HOME_STACK_ROOT="$(dirname "${BASH_SOURCE[0]}")"
+HOME_STACK_BIN="$(readlink -f "${BASH_SOURCE[0]}")"
+HOME_STACK_ROOT="$(dirname "$HOME_STACK_BIN")"
 
 # Menu system starts here
 # Display main menu
