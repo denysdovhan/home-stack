@@ -3,7 +3,7 @@
 # Installing dependencies
 echo "Installing dependencies..."
 sudo apt update
-sudo apt install -y bash jq curl avahi-daemon dbus aaparmor network-manager
+sudo apt install -y bash jq curl avahi-daemon dbus network-manager apparmor-utils
 
 machine=$(whiptail --title "Machine type" --menu \
     "Please select you machine type:" 20 78 12 -- \
