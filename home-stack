@@ -33,6 +33,7 @@ main_action=$(whiptail --title "Home Stack" --menu --notags \
   "install-ha-supervised" "Install Home Assistant Supervised" \
   "build-containers" "Build Containers" \
   "commands" "Control Containers" \
+  "update" "Update Home Stack" \
   3>&1 1>&2 2>&3)
 
 case $main_action in
@@ -51,5 +52,9 @@ case $main_action in
   'commands')
     # shellcheck source=./actions/commands.bash
     source "$HOME_STACK_ROOT/actions/commands.bash"
+  ;;
+  'update')
+    # shellcheck source=./actions/update.bash
+    source "$HOME_STACK_ROOT/actions/update.bash"
   ;;
 esac
