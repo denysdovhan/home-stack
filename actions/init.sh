@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# Check if docker and docker-compose are installed
-if home-stack::exists docker && home-stack::exists docker-compose; then
-  whiptail \
-    --title "Home Stack" \
-    --msgbox "Docker and docker-compose are already installed. Choose Ok to exit." \
-    10 60
-  exit
-fi
-
 # Install docker
 if home-stack::exists docker; then
   echo "docker is already installed"
@@ -26,6 +17,8 @@ else
   echo "Installing docker-compose..."
   sudo apt install -y docker-compose
 fi
+
+
 
 # Ask for reboot
 if (whiptail \

@@ -20,7 +20,7 @@ if [[ -z $DOCKER_COMPOSE ]]; then
 
   if [[ $? = 0 ]]; then
     # Copy templates to a future project root
-    rsync -a -q "$HOME_STACK_ROOT/templates/" "$PROJECT_ROOT/"
+    rsync -a -q "$HOME_STACK_DIR/templates/" "$PROJECT_ROOT/"
 
     DOCKER_COMPOSE="$PROJECT_ROOT/docker-compose.yaml"
 
@@ -65,13 +65,23 @@ if [[ -n "$selected_containers" ]]; then
 
     echo "Adding $container container..."
 
-    # TODO: Add install script for each container
-    cat "$HOME_STACK_ROOT/containers/$container/container.yaml" >> "$DOCKER_COMPOSE"
+    container_dir="$HOME_STACK_DIR/containers/$container"
 
-    if [[ -f "$HOME_STACK_ROOT/containers/$container/.env" ]]; then
-      echo "" >> "$PROJECT_ROOT/.env"
-      cat "$HOME_STACK_ROOT/containers/$container/.env" >> "$PROJECT_ROOT/.env"
-    fi
+    # TODO: Add install script for each container
+
+    # Add container to docker-compose
+    cat "$container_dir/container.yaml" >> "$DOCKER_COMPOSE"
+
+    # Add env file
+    # if [[ -f "$container_dir/.env" ]]; then
+    #   if [[ ! -d "$PROJECT_ROOT/$container" ]]; then
+    #     mkdir "$PROJECT_ROOT/$container"
+    #   fi
+    #   cat "$container_dir/.env" >> "$PROJECT_ROOT/env/$container.env"
+    # fi
+
+    # Execute postinstall script
+    [[ -f "$container_dir/install.sh" ]] && source "$container_dir/install.sh"
   done
 
   # TODO: Spin up those containers

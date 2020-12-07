@@ -6,9 +6,7 @@
       - PUID=1000
       - PGID=1000
       - VERSION=docker
-      #- UMASK_SET=022 #optional
     volumes:
       - ${VOLUMES}/plex/config:/config
-      #- ~/mnt/HDD/tvseries:/tv
-      #- ~/mnt/HDD/movies:/movies
+      # - ${MEDIA}/media:/media
     restart: unless-stopped
