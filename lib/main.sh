@@ -1,14 +1,16 @@
 #!/bin/bash
 
 case "$1" in
-  'init')
+  "init")
+    # shellcheck source=./init.sh
     source "$HOME_STACK_DIR/lib/init.sh"
   ;;
-  'add')
+  "add")
     echo 'add container'
   ;;
-  'server')
-    echo 'controll server'
+  "server")
+    # shellcheck source=./server.sh
+    source "$HOME_STACK_DIR/lib/server.sh"
   ;;
   *)
     echo "uknown"

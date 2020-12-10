@@ -8,27 +8,6 @@ declare -A containers=(
   #   home-assistant-docker
 )
 
-if [[ -z $DOCKER_COMPOSE ]]; then
-  PROJECT_DIR=$(whiptail \
-    --title "Home Stack" \
-    --inputbox "The root folder for your Home Stack configuration (current directory by default):" \
-    10 60 $PWD 3>&1 1>&2 2>&3)
-
-  if [[ $? = 0 ]]; then
-    # Copy templates to a future project root
-    rsync -a -q "$HOME_STACK_DIR/templates/" "$PROJECT_DIR/"
-
-    DOCKER_COMPOSE="$PROJECT_DIR/docker-compose.yaml"
-
-    whiptail \
-      --title "Home Stack" \
-      --msgbox "docker-compose.yaml and .env files has been created in $PROJECT_DIR" \
-      10 60
-  else
-    echo "Building containers aborted by user."
-  fi
-fi
-
 # Building list of entries for whiptail menu
 for key in "${!containers[@]}"; do
   list_entries+=("$key")

@@ -1,15 +1,5 @@
 #!/bin/bash
 
-echo stopping
-exit
-
-HOME_STACK_BIN="$(readlink -f "${BASH_SOURCE[0]}")"
-HOME_STACK_DIR="$(dirname "$HOME_STACK_BIN")"
-
-# 'docker-compose.y*ml' matches both .yml and .yaml extensions
-DOCKER_COMPOSE=$(home-stack::lookup docker-compose.y*ml)
-PROJECT_DIR=$(dirname "$DOCKER_COMPOSE")
-
 # Menu system starts here
 # Display main menu
 main_action=$(whiptail --title "Home Stack" --menu --notags \

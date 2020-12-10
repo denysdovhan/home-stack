@@ -20,6 +20,8 @@ fi
 
 # Generating new project from templates
 if [[ -z $PROJECT_DOCKER_COMPOSE ]]; then
+  NEW_PROJECT_DIR=""
+
   # Check for argument
   if [[ -d "$2" ]]; then
     NEW_PROJECT_DIR="$2"
@@ -62,9 +64,12 @@ if [[ -z $PROJECT_DOCKER_COMPOSE ]]; then
   unset HOME_STACK_PUID
   unset HOME_STACK_PGID
   unset HOME_STACK_TZ
+else
+  echo "$PROJECT_DOCKER_COMPOSE exists in the project root."
+  echo "Please, delete this file if you want it to be regenerated."
 fi
 
-Ask for reboot
+# Ask for reboot
 if (whiptail \
   --title "Restart Required" \
   --yesno "It is recommended to restart your device. Reboot now?" \
