@@ -9,7 +9,7 @@ if [[ -z "$MAIN_COMMAND" ]]; then
     "add" "Add Containers" \
     "server" "Control server" \
     "install-ha-supervised" "Install Home Assistant Supervised" \
-    "update" "Update Home Stack" \
+    "upgrade" "Update Home Stack" \
     3>&1 1>&2 2>&3
   )
 fi
@@ -30,8 +30,12 @@ case "$MAIN_COMMAND" in
     # shellcheck source=./install-ha-supervised.sh
     source "$HOME_STACK_DIR/lib/install-ha-supervised.sh"
   ;;
+  "upgrade")
+    # shellcheck source=./upgrade.sh
+    source "$HOME_STACK_DIR/lib/upgrade.sh"
+  ;;
   *)
-    # Print help info here
+    # TODO: Print help info here
     echo "Uknown command"
   ;;
 esac
