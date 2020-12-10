@@ -27,7 +27,7 @@ if [[ -z $PROJECT_DOCKER_COMPOSE ]]; then
     NEW_PROJECT_DIR="$2"
   fi
 
-  echo "Directory $2 does not exists"
+  echo "Directory '$2' does not exists"
 
   # If argument is not present, then ask user
   if [[ ! -d "$2" ]]; then

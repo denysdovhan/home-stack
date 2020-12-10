@@ -8,7 +8,7 @@ declare -A CONTAINERS=(
   #   home-assistant-docker
 )
 
-CONTAINERS_TO_INSTALL=""
+CONTAINERS_TO_INSTALL=
 
 # Check if project exists
 if [[ -z $PROJECT_DOCKER_COMPOSE ]]; then
@@ -20,7 +20,7 @@ fi
 # Validate arguments
 for argument in ${*:2}; do
   if [[ "${CONTAINERS[$argument]}" ]]; then
-    CONTAINERS_TO_INSTALL+=("$argument")
+    CONTAINERS_TO_INSTALL+="$argument"
   else
     echo "Container $argument does not exist!"
     exit 1
@@ -61,7 +61,6 @@ fi
 if [[ -n "${CONTAINERS_TO_INSTALL[*]}" ]]; then
   for container in "${CONTAINERS_TO_INSTALL[@]}"; do
     if grep -q "$container" "$PROJECT_DOCKER_COMPOSE"; then
-      echo "$container is already installed"
       continue;
     fi
 
@@ -72,16 +71,16 @@ if [[ -n "${CONTAINERS_TO_INSTALL[*]}" ]]; then
     # Add container to docker-compose
     cat "$CONTAINER_DIR/container.yaml" >> "$PROJECT_DOCKER_COMPOSE"
 
-    # Add env file
-    # if [[ -f "$container_dir/.env" ]]; then
-    #   if [[ ! -d "$PROJECT_DIR/$container" ]]; then
-    #     mkdir "$PROJECT_DIR/$container"
-    #   fi
-    #   cat "$container_dir/.env" >> "$PROJECT_DIR/env/$container.env"
-    # fi
+    # Concat environment
+    if [[ -f "$CONTAINER_DIR/.env" ]]; then
+      cat "$CONTAINER_DIR/.env" >> "$PROJECT_DIR/.env"
+    fi
 
     # Execute postinstall script
-    [[ -f "$CONTAINER_DIR/install.sh" ]] && source "$CONTAINER_DIR/install.sh"
+    if [[ -f "$CONTAINER_DIR/install.sh" ]]; then
+      # shellcheck disable=SC1090
+      source "$CONTAINER_DIR/install.sh"
+    fi
   done
 else
   echo "Adding containers is canceled"
