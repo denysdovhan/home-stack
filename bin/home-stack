@@ -8,7 +8,9 @@ HOME_STACK_DIR="$(dirname "$(dirname "$HOME_STACK_BIN")")"
 source "$HOME_STACK_DIR/lib/utils.sh"
 
 # 'docker-compose.y*ml' matches both .yml and .yaml extensions
+# shellcheck disable=SC2034
 PROJECT_DOCKER_COMPOSE=$(home-stack::lookup docker-compose.y*ml)
+# shellcheck disable=SC2034
 PROJECT_DIR=$(dirname "$DOCKER_COMPOSE")
 
 # Execute main
