@@ -1,6 +1,20 @@
 #!/bin/bash
 
-case "$1" in
+MAIN_COMMAND="$1"
+
+if [[ -z "$MAIN_COMMAND" ]]; then
+  MAIN_COMMAND=$(whiptail --title "Home Stack" --menu --notags \
+    "" 20 78 12 -- \
+    "init" "Install Docker" \
+    "install-ha-supervised" "Install Home Assistant Supervised" \
+    "add-containers" "Add Containers" \
+    "commands" "Control Containers" \
+    "update" "Update Home Stack" \
+    3>&1 1>&2 2>&3
+  )
+fi
+
+case "$MAIN_COMMAND" in
   "init")
     # shellcheck source=./init.sh
     source "$HOME_STACK_DIR/lib/init.sh"
@@ -13,7 +27,7 @@ case "$1" in
     source "$HOME_STACK_DIR/lib/server.sh"
   ;;
   *)
-    echo "uknown"
-    # spinning up ui
+    # Print help info here
+    echo "Uknown command"
   ;;
 esac
