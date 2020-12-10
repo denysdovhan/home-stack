@@ -1,0 +1,13 @@
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt
+    container_name: zigbee2mqtt
+    network_mode: host
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ${VOLUMES}/zigbee2mqtt:/app/data
+    devices:
+      - /dev/ttyAMA0:/dev/ttyACM0
+      #- /dev/ttyACM0:/dev/ttyACM0
+    restart: unless-stopped
+    privileged: true

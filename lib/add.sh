@@ -3,8 +3,8 @@
 declare -A CONTAINERS=(
   [portainer-ce]="Portainer CE"
   [plex]="Plex Media Server"
+  [zigbee2mqtt]="zigbee2mqtt"
   # TODO:
-  #   zigbee2mqtt
   #   home-assistant-docker
 )
 
