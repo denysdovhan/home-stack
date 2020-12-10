@@ -20,7 +20,8 @@ case "$MAIN_COMMAND" in
     source "$HOME_STACK_DIR/lib/init.sh"
   ;;
   "add")
-    echo 'add container'
+    # shellcheck source=./add.sh
+    source "$HOME_STACK_DIR/lib/add.sh"
   ;;
   "server")
     # shellcheck source=./server.sh
