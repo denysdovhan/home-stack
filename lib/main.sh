@@ -5,10 +5,10 @@ MAIN_COMMAND="$1"
 if [[ -z "$MAIN_COMMAND" ]]; then
   MAIN_COMMAND=$(whiptail --title "Home Stack" --menu --notags \
     "" 20 78 12 -- \
-    "init" "Install Docker" \
+    "init" "Init the project" \
+    "add" "Add Containers" \
+    "server" "Control server" \
     "install-ha-supervised" "Install Home Assistant Supervised" \
-    "add-containers" "Add Containers" \
-    "commands" "Control Containers" \
     "update" "Update Home Stack" \
     3>&1 1>&2 2>&3
   )
@@ -25,6 +25,10 @@ case "$MAIN_COMMAND" in
   "server")
     # shellcheck source=./server.sh
     source "$HOME_STACK_DIR/lib/server.sh"
+  ;;
+  "install-ha-supervised")
+    # shellcheck source=./install-ha-supervised.sh
+    source "$HOME_STACK_DIR/lib/install-ha-supervised.sh"
   ;;
   *)
     # Print help info here

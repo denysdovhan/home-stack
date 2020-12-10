@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Installing dependencies
-echo "Installing dependencies..."
-sudo apt update
-sudo apt install -y bash jq curl avahi-daemon dbus network-manager apparmor-utils
+MACHINE="$2"
 
-machine=$(whiptail --title "Machine type" --menu \
+if [[ -z "$MACHINE" ]]; then
+  MACHINE=$(whiptail --title "Machine type" --menu \
     "Please select you machine type:" 20 78 12 -- \
     "raspberrypi4" " " \
     "raspberrypi3" " " \
@@ -21,10 +19,12 @@ machine=$(whiptail --title "Machine type" --menu \
     "odroid-c2" " " \
     "intel-nuc" " " \
     "tinker" " " \
-    3>&1 1>&2 2>&3)
+    3>&1 1>&2 2>&3
+  )
+fi
 
-if [ -n "$machine" ]; then
-  curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | sudo bash -s -- -m $machine
+if [ -n "$MACHINE" ]; then
+  curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | sudo bash -s -- -m $MACHINE
 else
   echo "Installation of Home Assistant Supervised is canceled"
   exit
