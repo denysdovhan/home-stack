@@ -8,25 +8,21 @@ declare -A containers=(
   #   home-assistant-docker
 )
 
-# 'docker-compose.y*ml' matches both .yml and .yaml extensions
-DOCKER_COMPOSE=$(home-stack::lookup docker-compose.y*ml)
-PROJECT_ROOT=$(dirname "$DOCKER_COMPOSE")
-
 if [[ -z $DOCKER_COMPOSE ]]; then
-  PROJECT_ROOT=$(whiptail \
+  PROJECT_DIR=$(whiptail \
     --title "Home Stack" \
     --inputbox "The root folder for your Home Stack configuration (current directory by default):" \
     10 60 $PWD 3>&1 1>&2 2>&3)
 
   if [[ $? = 0 ]]; then
     # Copy templates to a future project root
-    rsync -a -q "$HOME_STACK_DIR/templates/" "$PROJECT_ROOT/"
+    rsync -a -q "$HOME_STACK_DIR/templates/" "$PROJECT_DIR/"
 
-    DOCKER_COMPOSE="$PROJECT_ROOT/docker-compose.yaml"
+    DOCKER_COMPOSE="$PROJECT_DIR/docker-compose.yaml"
 
     whiptail \
       --title "Home Stack" \
-      --msgbox "docker-compose.yaml and .env files has been created in $PROJECT_ROOT" \
+      --msgbox "docker-compose.yaml and .env files has been created in $PROJECT_DIR" \
       10 60
   else
     echo "Building containers aborted by user."
@@ -74,10 +70,10 @@ if [[ -n "$selected_containers" ]]; then
 
     # Add env file
     # if [[ -f "$container_dir/.env" ]]; then
-    #   if [[ ! -d "$PROJECT_ROOT/$container" ]]; then
-    #     mkdir "$PROJECT_ROOT/$container"
+    #   if [[ ! -d "$PROJECT_DIR/$container" ]]; then
+    #     mkdir "$PROJECT_DIR/$container"
     #   fi
-    #   cat "$container_dir/.env" >> "$PROJECT_ROOT/env/$container.env"
+    #   cat "$container_dir/.env" >> "$PROJECT_DIR/env/$container.env"
     # fi
 
     # Execute postinstall script

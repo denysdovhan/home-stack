@@ -1,29 +1,14 @@
 #!/bin/bash
 
-# Check if command exists in $PATH
-# USAGE:
-#   home-stack::exists <command>
-home-stack::exists() {
-  command -v "$1" > /dev/null 2>&1
-}
-
-# Search all directories up until it finds specified file
-# USAGE:
-#   home-stack::lookup <command>
-home-stack::lookup() {
-  x=$(pwd)
-  while [ "$x" != "/" ] ; do
-    match=$(find "$x" -maxdepth 1 -name "$1")
-    if [[ -n "$match" ]]; then
-      echo "$match"
-      return
-    fi
-    x=$(dirname "$x")
-  done
-}
+echo stopping
+exit
 
 HOME_STACK_BIN="$(readlink -f "${BASH_SOURCE[0]}")"
 HOME_STACK_DIR="$(dirname "$HOME_STACK_BIN")"
+
+# 'docker-compose.y*ml' matches both .yml and .yaml extensions
+DOCKER_COMPOSE=$(home-stack::lookup docker-compose.y*ml)
+PROJECT_DIR=$(dirname "$DOCKER_COMPOSE")
 
 # Menu system starts here
 # Display main menu

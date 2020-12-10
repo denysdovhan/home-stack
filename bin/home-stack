@@ -1,0 +1,16 @@
+#!/bin/bash
+
+HOME_STACK_BIN="$(readlink -f "${BASH_SOURCE[0]}")"
+HOME_STACK_DIR="$(dirname "$(dirname "$HOME_STACK_BIN")")"
+
+# Load utils
+# shellcheck source=../lib/utils.sh
+source "$HOME_STACK_DIR/lib/utils.sh"
+
+# 'docker-compose.y*ml' matches both .yml and .yaml extensions
+PROJECT_DOCKER_COMPOSE=$(home-stack::lookup docker-compose.y*ml)
+PROJECT_DIR=$(dirname "$DOCKER_COMPOSE")
+
+# Execute main
+# shellcheck source=../lib/main.sh
+source "$HOME_STACK_DIR/lib/main.sh"

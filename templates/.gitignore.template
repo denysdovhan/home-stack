@@ -1,0 +1,4 @@
+# Home Stack Gitignore
+
+.env
+.volumes
