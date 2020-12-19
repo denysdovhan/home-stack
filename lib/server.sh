@@ -24,7 +24,7 @@ case "$SERVER_COMMAND" in
   ;;
   "down" | "shutdown")
     echo "Stopping and removing containers..."
-    docker-compose down
+    docker-compose down --remove-orphans
   ;;
   "stop")
     echo "Stopping containers..."
@@ -40,7 +40,7 @@ case "$SERVER_COMMAND" in
   ;;
   "update")
       echo "Stopping containers..."
-      docker-compose down
+      docker-compose down --remove-orphans
       echo "Pulling latest images..."
       docker-compose pull
       echo "Building images..."
