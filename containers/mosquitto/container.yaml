@@ -1,0 +1,11 @@
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ${VOLUMES}/mosquitto/data:/mosquitto/data
+      - ${VOLUMES}/mosquitto/log:/mosquitto/log
+      - ${MOSQUITTO_CONFIG}/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ${MOSQUITTO_CONFIG}/filter.acl:/mosquitto/config/filter.acl
