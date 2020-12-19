@@ -1,6 +1,7 @@
 #!/bin/bash
 
 declare -A CONTAINERS=(
+  [adguard]="AdGuard Home"
   [airconnect]="AirConnect"
   [homeassistant]="Home Assistant (Container)"
   [mosquitto]="Mosquitto (MQTT)"
