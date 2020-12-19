@@ -23,14 +23,12 @@ if [[ -z $PROJECT_DOCKER_COMPOSE ]]; then
   NEW_PROJECT_DIR=""
 
   # Check for argument
-  if [[ -d "$2" ]]; then
+  if [[ -n "$2" ]]; then
     NEW_PROJECT_DIR="$2"
   fi
 
-  echo "Directory '$2' does not exists"
-
   # If argument is not present, then ask user
-  if [[ ! -d "$2" ]]; then
+  if [[ -z "$2" ]]; then
     NEW_PROJECT_DIR=$(whiptail \
       --title "Home Stack" \
       --inputbox "The root folder for your Home Stack configuration (current directory by default):" \
@@ -42,6 +40,12 @@ if [[ -z $PROJECT_DOCKER_COMPOSE ]]; then
       echo "Initialising new project is aborted by the user"
       exit
     fi
+  fi
+
+  if [[ ! -d "$NEW_PROJECT_DIR" ]]; then
+    echo "Directory $NEW_PROJECT_DIR does not exist"
+    echo "Creating directory $NEW_PROJECT_DIR"
+    mkdir -p "$NEW_PROJECT_DIR"
   fi
 
   echo "Generating new project in $NEW_PROJECT_DIR"
