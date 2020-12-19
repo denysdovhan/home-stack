@@ -1,0 +1,6 @@
+  airconnect:
+    container_name: airconnect
+    hostname: airconnect
+    restart: unless-stopped
+    image: 1activegeek/airconnect
+    network_mode: host

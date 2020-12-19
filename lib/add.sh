@@ -1,6 +1,7 @@
 #!/bin/bash
 
 declare -A CONTAINERS=(
+  [airconnect]="AirConnect"
   [homeassistant]="Home Assistant (Container)"
   [mosquitto]="Mosquitto (MQTT)"
   [plex]="Plex Media Server"
