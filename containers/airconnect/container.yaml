@@ -1,6 +1,5 @@
   airconnect:
     container_name: airconnect
-    hostname: airconnect
-    restart: unless-stopped
     image: 1activegeek/airconnect
+    restart: unless-stopped
     network_mode: host
