@@ -1,11 +1,11 @@
 #!/bin/bash
 
 declare -A CONTAINERS=(
-  [portainer-ce]="Portainer CE"
+  [mosquitto]="Mosquitto (MQTT)"
   [plex]="Plex Media Server"
+  [portainer-ce]="Portainer CE"
+  [transmission]="Transmission"
   [zigbee2mqtt]="zigbee2mqtt"
-  # TODO:
-  #   home-assistant-docker
 )
 
 CONTAINERS_TO_INSTALL=
