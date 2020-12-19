@@ -1,0 +1,13 @@
+  samba:
+    container_name: samba
+    hostname: samba
+    image: dperson/samba
+    volumes:
+    - ${SAMBA_SHARE}:/mnt
+    ports:
+    - "139:139"
+    - "445:445"
+    - "137:137/udp"
+    - "138:138/udp"
+    command: samba.sh -s "home-stack;/mnt;yes;no;no;all" -u ${SAMBA_USER};${SAMBA_PASSWORD}
+    restart: always

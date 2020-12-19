@@ -5,6 +5,7 @@ declare -A CONTAINERS=(
   [mosquitto]="Mosquitto (MQTT)"
   [plex]="Plex Media Server"
   [portainer-ce]="Portainer CE"
+  [samba]="Samba"
   [transmission]="Transmission"
   [zigbee2mqtt]="zigbee2mqtt"
 )
