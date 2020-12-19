@@ -1,0 +1,11 @@
+  homeassistant:
+    # Use homeassistant/raspberrypi4-homeassistant:stable for Pi4
+    # Use homeassistant/raspberrypi3-homeassistant:stable for Pi3
+    image: homeassistant/home-assistant:stable
+    container_name: homeassistant
+    volumes:
+      - ${HOMEASSISTANT_CONFIG}:/config
+    environment:
+      - TZ=${TZ}
+    restart: always
+    network_mode: host
