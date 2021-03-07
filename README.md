@@ -1,1 +1,5 @@
 # home-stack
+
+TODO:
+
+* backups
