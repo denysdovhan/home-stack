@@ -1,5 +1,7 @@
 #!/bin/bash
 
+SHOULD_REBOOT=
+
 # Install docker
 if home-stack::exists docker; then
   echo "docker is already installed"
@@ -8,6 +10,7 @@ else
   curl -fsSL https://get.docker.com | sh
   sudo usermod -G docker -a $USER
   sudo usermod -G bluetooth -a $USER
+  SHOULD_REBOOT=true
 fi
 
 # Install docker-compose
@@ -16,6 +19,7 @@ if home-stack::exists docker-compose; then
 else
   echo "Installing docker-compose..."
   sudo apt install -y docker-compose
+  SHOULD_REBOOT=true
 fi
 
 # Generating new project from templates
@@ -73,12 +77,13 @@ else
   echo "Please, delete this file if you want it to be regenerated."
 fi
 
-# Ask for reboot
-if (whiptail \
-  --title "Restart Required" \
-  --yesno "It is recommended to restart your device. Reboot now?" \
-  20 78);
-then
-  sudo reboot
+# Ask for reboot, if needed
+if [ -n "$SHOULD_REBOOT" ]; then
+  if (whiptail \
+    --title "Restart Required" \
+    --yesno "It is recommended to restart your device. Reboot now?" \
+    20 78);
+  then
+    sudo reboot
+  fi
 fi
-
