@@ -13,6 +13,11 @@ PROJECT_DOCKER_COMPOSE=$(home-stack::lookup docker-compose.y*ml)
 # shellcheck disable=SC2034
 PROJECT_DIR=$(dirname "$DOCKER_COMPOSE")
 
+# Load variables
+if [ -f "$PROJECT_DIR/.env" ]; then
+  home-stack::load_vars "$PROJECT_DIR/.env"
+fi
+
 # Execute main
 # shellcheck source=../lib/main.sh
 source "$HOME_STACK_DIR/lib/main.sh"

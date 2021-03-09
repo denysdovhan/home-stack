@@ -21,3 +21,11 @@ home-stack::lookup() {
     x=$(dirname "$x")
   done
 }
+
+# Load variables from environment file
+# USAGE:
+#   home-stack::load_vars <path>
+home-stack::load_vars() {
+  # shellcheck disable=SC2046
+  export $(grep -v '^#' "$1" | xargs);
+}
