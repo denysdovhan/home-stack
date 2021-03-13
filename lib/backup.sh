@@ -21,7 +21,9 @@ case "$BACKUP_COMMAND" in
 
     echo "Compressing $PROJECT_DIR into $BACKUP_FILE..."
 
-    tar --exclude="$BACKUPS" czvf "$BACKUP_FILE" "$PROJECT_DIR"
+    pushd "$PROJECT_DIR" > /dev/null || exit
+    tar --exclude="$BACKUPS" -czvf "$BACKUP_FILE" .
+    popd > /dev/null || exit
 
     if [[ ! -f "$BACKUP_FILE" ]]; then
       echo "Something went wrong!"
